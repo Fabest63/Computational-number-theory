@@ -20,7 +20,10 @@ You can import these functions into your own scripts:
 
 ```python
 from src.primes import is_prime
+import src.sequences 
 
 if is_prime(104729):
     print("It's prime!")
+
+
 
