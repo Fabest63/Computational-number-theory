@@ -75,9 +75,5 @@ def fibonacci_sum(n, i):
         # Calculate the next Fibonacci number
         a, b = b, a + b
 
-    # Apply the specific logic for odd sums (subtracting 1 as per original code)
-    if i != 1:
-        return total_sum 
-        
     return total_sum
     
