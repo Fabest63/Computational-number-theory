@@ -1,4 +1,4 @@
-from src import primes, sequences
+from src import primes, sequences, palindrome
 
 def test_prime_checks():
     """Verifies the primality test logic."""
@@ -44,3 +44,16 @@ def test_fibonacci_sum():
     assert sequences.fibonacci_sum(5, 1) == 2       # Only 2 is even below 5
     assert sequences.fibonacci_sum(5, 0) == 10      # Sum of all below 5
     assert sequences.fibonacci_sum(10, 0) == 99     # Sum of all below 10
+
+def test_palindrome_checks():
+    """Verifies palindrome checking logic."""
+    assert palindrome.is_pal(121) is True
+    assert palindrome.is_pal(-121) is False
+    assert palindrome.is_pal(10) is False
+    assert palindrome.is_pal(12321) is True
+
+def test_max_palindrome_product():
+    """Verifies the largest palindrome product logic."""
+    assert palindrome.max_pal_num(2) == 9009     # 91 * 99 = 9009
+    assert palindrome.max_pal_num(1) == 9        # 3 * 3 = 9
+    assert palindrome.max_pal_num(0) is None     # Invalid input
