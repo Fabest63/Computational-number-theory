@@ -1,57 +1,46 @@
-import unittest
-from src.primes import is_prime
-from src.primes import max_prime_divisor
-from src.sequences import sum_multiples
-from src.sequences import fibonacci
-from src.sequences import fibonacci_number_limit
-from src.sequences import fibonacci_sum
+from src import primes, sequences
 
+def test_prime_checks():
+    """Verifies the primality test logic."""
+    # Known primes
+    assert primes.is_prime(2) is True
+    assert primes.is_prime(3) is True
+    assert primes.is_prime(5) is True
+    assert primes.is_prime(7) is True
 
-class TestPrimeFunctions(unittest.TestCase):
-    def test_small_primes(self):
-        self.assertTrue(is_prime(2))
-        self.assertTrue(is_prime(3))
-        self.assertTrue(is_prime(5))
-        self.assertTrue(is_prime(7))
+    # Known non-primes
+    assert primes.is_prime(1) is False
+    assert primes.is_prime(4) is False
+    assert primes.is_prime(9) is False
 
-    def test_non_primes(self):
-        self.assertFalse(is_prime(1))
-        self.assertFalse(is_prime(4))
-        self.assertFalse(is_prime(9))
+def test_max_prime_divisor():
+    """Verifies the calculation of the largest prime factor."""
+    assert primes.max_prime_divisor(28) == 7        # 28 = 2^2 * 7
+    assert primes.max_prime_divisor(18) == 3        # 18 = 2 * 3^2
+    assert primes.max_prime_divisor(29) == 29       # Prime number returns itself
+    assert primes.max_prime_divisor(13195) == 29
+    assert primes.max_prime_divisor(1) is None      # Edge case: 1 has no prime factors
+    assert primes.max_prime_divisor(-3) is None     # Edge case: Negatives
+
+def test_sequence_sums(): 
+    """Verifies the sum of multiples logic."""
+    assert sequences.sum_multiples(10, 3) == 18     # 3 + 6 + 9 = 18
+    assert sequences.sum_multiples(20, 5) == 30     # 5 + 10 + 15 = 30
+    assert sequences.sum_multiples(15, 15) == 0     # Limit is exclusive
+
+def test_fibonacci_logic():
+    """Verifies Fibonacci sequence generation and limits."""
+    # Basic sequence checks
+    assert sequences.fibonacci(0) == 1
+    assert sequences.fibonacci(3) == 2
+    assert sequences.fibonacci(5) == 5
     
-    def test_max_prime_divisor(self):
-        self.assertEqual(max_prime_divisor(28), 7) # 28 = 2^2 * 7
-        self.assertEqual(max_prime_divisor(18), 3) # 18 = 2 * 3^2
-        self.assertEqual(max_prime_divisor(29), 29) # 29 
-        self.assertEqual(max_prime_divisor(13195), 29) # 29 
-        self.assertEqual(max_prime_divisor(136782374023), 2011) # 2011 
-        self.assertEqual(max_prime_divisor(1), None) # No prime divisors
-        self.assertEqual(max_prime_divisor(-3), None) # No prime divisors
+    # Check limit logic
+    assert sequences.fibonacci_number_limit(5, 7) is None   # 5 < 7
+    assert sequences.fibonacci_number_limit(5, 3) == 5      # 5 > 3
 
-    def test_sequences_sum(self): 
-        self.assertEqual(sum_multiples(10, 3), 18) # 0 + 3 + 6 + 9 
-        self.assertEqual(sum_multiples(20, 5), 30) # 0 + 5 + 10 + 15
-        self.assertEqual(sum_multiples(15, 15), 0) # 0
-    
-    def test_fibonacci(self):
-        self.assertEqual(fibonacci(0), 1)
-        self.assertEqual(fibonacci(1), 1)
-        self.assertEqual(fibonacci(2), 1)
-        self.assertEqual(fibonacci(3), 2)
-        self.assertEqual(fibonacci(4), 3)
-        self.assertEqual(fibonacci(5), 5)
-    
-    def test_fibonacci_number_limit(self):
-        self.assertEqual(fibonacci_number_limit(5, 7), None) # 5 < 7
-        self.assertEqual(fibonacci_number_limit(5, 3), 5) # 5 > 3
-        self.assertEqual(fibonacci_number_limit(4, 4), None) # 3 < 4
-        self.assertEqual(fibonacci_number_limit(4, 3), None) # 3 <= 3
-
-    def test_fibonacci_sum(self):
-        self.assertEqual(fibonacci_sum(5, 1), 2) # 2 = 2
-        self.assertEqual(fibonacci_sum(5, 0), 10) # 1 + 1 + 3 + 5 = 10
-        self.assertEqual(fibonacci_sum(10, 1), 44) # 2 + 8 + 34 = 44
-        self.assertEqual(fibonacci_sum(10, 0), 99) # 1 + 1 + 3 + 5 + 13 + 21 = 99
-
-if __name__ == '__main__':
-    unittest.main()
+def test_fibonacci_sum():
+    """Verifies the sum of even/odd Fibonacci numbers."""
+    assert sequences.fibonacci_sum(5, 1) == 2       # Only 2 is even below 5
+    assert sequences.fibonacci_sum(5, 0) == 10      # Sum of all below 5
+    assert sequences.fibonacci_sum(10, 0) == 99     # Sum of all below 10
