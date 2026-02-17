@@ -27,7 +27,9 @@ def is_prime(n: int) -> bool:
       
     return True
 
-def max_prime_dividor(n:int):
+
+
+def max_prime_divisor(n:int):
     """
     Finds the largest prime divisor of a given number.
     
@@ -60,3 +62,4 @@ def max_prime_dividor(n:int):
         max_prime = n
         
     return max_prime
+

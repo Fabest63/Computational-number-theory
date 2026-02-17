@@ -1,5 +1,6 @@
 import unittest
 from src.primes import is_prime
+from src.primes import max_prime_divisor
 from src.sequences import sum_multiples
 from src.sequences import fibonacci
 from src.sequences import fibonacci_number_limit
@@ -17,6 +18,15 @@ class TestPrimeFunctions(unittest.TestCase):
         self.assertFalse(is_prime(1))
         self.assertFalse(is_prime(4))
         self.assertFalse(is_prime(9))
+    
+    def test_max_prime_divisor(self):
+        self.assertEqual(max_prime_divisor(28), 7) # 28 = 2^2 * 7
+        self.assertEqual(max_prime_divisor(18), 3) # 18 = 2 * 3^2
+        self.assertEqual(max_prime_divisor(29), 29) # 29 
+        self.assertEqual(max_prime_divisor(13195), 29) # 29 
+        self.assertEqual(max_prime_divisor(136782374023), 2011) # 2011 
+        self.assertEqual(max_prime_divisor(1), None) # No prime divisors
+        self.assertEqual(max_prime_divisor(-3), None) # No prime divisors
 
     def test_sequences_sum(self): 
         self.assertEqual(sum_multiples(10, 3), 18) # 0 + 3 + 6 + 9 
