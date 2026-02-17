@@ -1,6 +1,6 @@
 import math
 
-def sum_multiples(n, i):
+def sum_multiples(n: int, i: int) -> int:
     """
     Returns the sum of all multiples of i below n. 
     Complexity: O(n/i) 
@@ -10,7 +10,7 @@ def sum_multiples(n, i):
     """
     return sum(x for x in range(n) if x % i == 0)
 
-def fibonacci(n):
+def fibonacci(n: int) -> int:
     """
     Returns the nth Fibonacci number. 
     Complexity: O(n) 
@@ -29,7 +29,7 @@ def fibonacci(n):
             a, b = b, a + b
         return b
     
-def fibonacci_number_limit(n, m):
+def fibonacci_number_limit(n: int, m: int):
     """
     Returns the nth Fibonacci number only if it is strictly greater than m.
     Otherwise, returns None.
@@ -50,7 +50,7 @@ def fibonacci_number_limit(n, m):
     else:
         return None
 
-def fibonacci_sum(n, i):
+def fibonacci_sum(n: int, i: int) -> int:
     """
     Returns the sum of even or odd Fibonacci numbers up to index n. 
     Complexity: O(n) 
